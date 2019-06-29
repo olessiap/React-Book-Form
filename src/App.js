@@ -1,26 +1,41 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react';
+import ReactDOM from 'react-dom'
+import Table from './Table.js'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+    state = {
+        books: [
+            {
+                title: "book 1",
+                author: "author 1"
+            },
+            {
+                title: "book 2",
+                author: "author 2"
+            },
+            {
+                title: "book 3",
+                author: "author 3"
+            },
+        ]
+    }
+    
+    removeBook = index => {
+        const { books } = this.state
+
+        this.setState({
+            books: books.filter((book, i) => {
+                return i !== index
+            })
+        })
+    }
+    
+    render() {
+        const { books } = this.state
+        return(
+            <Table bookData={books} removeBook={this.removeBook}/>
+        )
+    }
 }
 
-export default App;
+export default App
