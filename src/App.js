@@ -1,23 +1,11 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom'
 import Table from './Table.js'
+import Form from './Form.js'
 
 class App extends Component {
     state = {
-        books: [
-            {
-                title: "book 1",
-                author: "author 1"
-            },
-            {
-                title: "book 2",
-                author: "author 2"
-            },
-            {
-                title: "book 3",
-                author: "author 3"
-            },
-        ]
+        books:[]
     }
     
     removeBook = index => {
@@ -29,11 +17,17 @@ class App extends Component {
             })
         })
     }
-    
+    handleSubmit = book => {
+        this.setState({books:[...this.state.books, book]})
+    }
     render() {
         const { books } = this.state
         return(
-            <Table bookData={books} removeBook={this.removeBook}/>
+            <div>
+                <Table bookData={books} removeBook={this.removeBook}/>
+                <Form handleSubmit={this.handleSubmit}/>
+            </div>
+           
         )
     }
 }
